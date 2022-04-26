@@ -3,32 +3,39 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Post;
 use App\User;
 use App\Follow;
+
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class FollowsController extends Controller
 {
     //
     public function followList(){
-        return view('follows.followList');
+        $posts = Post::query()->whereIn('user_id', Auth::user()->notFollowing()->pluck('followed_id'))->latest()
+
+        ->select('posts.id','users.username', 'posts.user_id','posts.post', 'posts.created_at')
+        ->join('users', 'users.id', '=', 'posts.user_id')
+        ->get();
+
+        return view('follows.followList' , compact('posts'));
     }
     public function followerList(){
-        return view('follows.followerList');
+        $posts = Post::query()->whereIn('user_id', Auth::user()->isFollowing()->pluck('following_id'))->latest()
+
+        ->select('posts.id','users.username', 'posts.user_id','posts.post', 'posts.created_at')
+        ->join('users', 'users.id', '=', 'posts.user_id')
+        ->get();
+
+        return view('follows.followerList' , compact('posts'));
     }
 
-    public function follow(User $user) {
-        $follow = Follow::create([
-            'following_id' => \Auth::user()->id,
-            'followed_id' => $user->id,
-        ]);
-        $followCount = count(Follow::where('followed_id' , $user->id)->get());
-        return response()->json(['followCount' => $followCount]);
-    }
-    public function unfollow(User $user) {
-        $follow = Follow::where('following_id', \Auth::user()->id)->where('followed_id', $user->id)->first();
-        $follow->delete();
-        $followCount = count(Follow::where('followed_id', $user->id)->get());
 
-        return response()->json(['followCount' => $followCount]);
-    }
+    public function followCounts(){
+        $followCounts = count(Follow::where('followed_id', Auth::user()->id)->get());
+
+        return view('auth.login', compact('followCounts'));
+        }
 }

@@ -19,8 +19,8 @@ class UsersController extends Controller
     {
         // $all_users = $user->getAllUsers(auth()->user()->id);
         $id = Auth::user()->id;
-        $all_users = User::where('id','!=',$id)->get();
-        $users = User::where('id','!=',$id)->get();
+        $all_users = User::where('id','<>',$id)->get();
+        // $users = User::where('id','!=',$id)->get();
         return view('users.search', ['all_users'  => $all_users]);
     }
 
@@ -39,12 +39,15 @@ class UsersController extends Controller
     }
     public function search(Request $request)
     {
+        $id = Auth::user()->id;
         $word = $request->get('word');
     if ($word !== null) {
         $escape_word = addcslashes($word, '\\_%');
-        $all_users = User::where('username', 'like', '%' . $escape_word . '%')->get();
+        $all_users = User::where('username', 'like', '%' . $escape_word . '%')
+        ->where('id','<>',$id)
+        ->get();
     } else {
-        $all_users = User::all();
+        $all_users = User::where('id','<>',$id)->get();
     }
     return view(
         'users.search',
