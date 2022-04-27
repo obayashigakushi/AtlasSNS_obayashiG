@@ -38,15 +38,6 @@
 
 </div>
 
-                <!-- <div>
-                <ul>
-                    <li><a href="/top">ホーム</a></li>
-                    <li><a href="/profile">プロフィール</a></li>
-                    <li><a href="/logout">ログアウト</a></li>
-
-                </ul>
-            </div> -->
-
     </header>
     <div id="row">
         <div id="container">
