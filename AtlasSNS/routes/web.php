@@ -66,9 +66,14 @@ Route::get('/search','UsersController@search');
     // フォロー/フォロー解除を追加
     Route::post('users/{user}/follow', 'UsersController@follow')->name('follow');
     Route::post('users/{user}/unfollow', 'UsersController@unfollow')->name('unfollow');
-// Route::get('/profile','UsersController@profile');
-// Route::post('/profile','UsersController@profile');
+Route::get('/profile','UsersController@profile');
+Route::post('/profile','UsersController@profile');
 // Route::get('/search','UsersController@search');
+Route::put('/update','UsersController@update');
+
+// Route::get('/profile','UsersController@store');
+
+
 
 Route::get('/follow-list','PostsController@index');
 Route::get('/follower-list','PostsController@index');
