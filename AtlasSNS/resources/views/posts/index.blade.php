@@ -22,7 +22,7 @@
                 <table class="table table-hover">
 
         <tr>
-             <td> <a href="{{$post->user_id}}/profile"><img class="image-circle" src="{{ asset('storage/' . $post->images ) }}" alt="ユーザーアイコン"></a> </td>
+             <td> <a href="{{$post->user_id}}/profile"><img class="image-circle" src="{{ asset('images/' . $post->images ) }}" alt="ユーザーアイコン"></a> </td>
 
                     <td>{{ $post->username }}</td>
                     <td>{{ $post->post }}</td>
