@@ -29,7 +29,7 @@
 
 <div class="menu">
   <input type="checkbox" id="menu_bar01" />
-  <label for="menu_bar01"><p>{{Auth::user()->username}}さん<img src="images/arrow.png"></p></label>
+  <label for="menu_bar01"><p>{{Auth::user()->username}}さん<img src=""></p></label>
   <ul id="links01">
                     <li><a href="/top">ホーム</a></li>
                     <li><a href="/profile">プロフィール</a></li>
@@ -37,6 +37,15 @@
   </ul>
 
 </div>
+
+                <!-- <div>
+                <ul>
+                    <li><a href="/top">ホーム</a></li>
+                    <li><a href="/profile">プロフィール</a></li>
+                    <li><a href="/logout">ログアウト</a></li>
+
+                </ul>
+            </div> -->
 
     </header>
     <div id="row">

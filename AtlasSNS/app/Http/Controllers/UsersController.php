@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 use App\User;
 use App\Post;
@@ -57,7 +58,7 @@ class UsersController extends Controller
         ]
     );
     }
-    public function profile(){
+        public function profile(){
             $user = Auth::user();
             return view(
         'users.profile',
@@ -65,6 +66,35 @@ class UsersController extends Controller
             'user' => $user
         ]
     );
-    }
+}
+
+        public function update(Request $request , User $user){
+
+            $inputs=$request->validate([
+                'username' => 'required|string|min:2|max:12',
+                'mail' => 'required|string|email|min:5|max:40',
+
+                'password' => 'required|string|alpha_num|min:8|max:20|confirmed',
+                'bio'=> 'nullable|string|max:150',
+
+            ]);
+
+            $user = Auth::user();
+            $user->username=$request->username;
+            $user->mail=$request->mail;
+            $user->password=Hash::make($request->password);
+            $user->bio=$request->bio;
+            $user->id=auth()->user()->id;
+
+            if(request('images')){
+                $original=request()->file('images')->getClientOriginalName();
+                $file=request()->file('images')->move('storage/app/public', $original);
+                $user->images=$original;
+            }
+            $user->save();
+
+
+            return redirect('/profile');
+        }
 
 }
