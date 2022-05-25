@@ -32,7 +32,7 @@ class PostsController extends Controller
 
 $posts = Post::query()->whereIn('user_id', Auth::user()->notFollowing()->pluck('followed_id'))->orWhere('user_id', Auth::user()->id)->latest()
 
-        ->select('posts.id','users.username', 'posts.user_id','posts.post', 'posts.created_at')
+        ->select('posts.id','users.username', 'posts.user_id','posts.post', 'posts.created_at','users.images')
         ->join('users', 'users.id', '=', 'posts.user_id')
         ->get();
         return view('posts.index', compact('posts'));

@@ -2,9 +2,10 @@
 
 @section('content')
 
-            <form action="/create_post" method="post">
+<body>
+                <form action="/create_post" method="post">
             {{ csrf_field() }}
-                <div style="background-color: #E8F4FA; text-align: center;">
+                <div style="">
                     <input type="text" name="post" style="margin: 1rem; padding: 0 1rem; width: 70%; border-radius: 6px; border: 1px solid #ccc; height: 2.3rem;" placeholder="入力">
 
                     <!-- <input type='hidden' name='id' class="id"> -->
@@ -18,32 +19,40 @@
             </form>
 
                 @foreach($posts as $post)
+                <div>
+                <ul>
+                <li class="post-block">
 
-                <table class="table table-hover">
 
-        <tr>
-             <td> <a href="{{$post->user_id}}/profile"><img class="image-circle" src="{{ asset('storage/' . $post->images ) }}" alt="ユーザーアイコン"></a> </td>
+             <figure><img class="rounded-circle" src="{{ asset('storage/' . $post->images ) }}" ></figure>
+                  <div class="post-content">
+                      <div>
+                    <div class="post-name">{{ $post->username }}</div>
+                    <div>{{ $post->created_at }}</div>
 
-                    <td>{{ $post->username }}</td>
-                    <td>{{ $post->post }}</td>
-                    <td>{{ $post->created_at }}</td>
+                    </div>
+                    <div>{{ $post->post }}</div>
+</div>
+
             @if (Auth::user()->id == $post->user_id)
-                <td>
+                <div>
 
 
-                   <button type="button" post="{{$post->post}}" post_id="{{$post->id}}" class="btn js-modal-open">
-                    <img src="{{ asset('images/edit.png') }}" alt="編集" >
+
+                    <img class="btn js-modal-open" post="{{$post->post}}" post_id="{{$post->id}}" src="{{ asset('images/edit.png') }}" alt="編集" >
                     </button>
-                </td>
+</div>
 
 
-                <td>
-                    <a class="btn btn-danger" href="/top/{{$post->post}}/delete" onclick="return confirm('こちらの投稿を削除してもよろしいでしょうか？')">削除
+                <div>
+                    <a href="/top/{{$post->post}}/delete" onclick="return confirm('こちらの投稿を削除してもよろしいでしょうか？')"><img class='delete' src="{{ asset('images/trash-h.png') }}" alt="削除" >
                 </a>
-            </td>
+            </div>
              @endif
-        </tr>
-</table>
+</li>
+</ul>
+</div>
+</body>
 
                 @endforeach
 
@@ -77,4 +86,6 @@
   });
 });
 </script>
+
+
 @endsection

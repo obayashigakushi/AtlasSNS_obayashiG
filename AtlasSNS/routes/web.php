@@ -60,6 +60,9 @@ Route::post('/top', 'PostsController@update');
 
 Route::get('/followList','FollowsController@followList');
 Route::get('/followerList','FollowsController@followerList');
+Route::get('/profiles/{user_id}','FollowsController@show')->name('users.profiles');
+
+
 Route::get('/search','UsersController@index');
 Route::get('/search','UsersController@search');
 
@@ -77,6 +80,11 @@ Route::put('/update','UsersController@update');
 
 Route::get('/follow-list','PostsController@index');
 Route::get('/follower-list','PostsController@index');
+
+Route::post('users/{user}/follows', 'FollowsController@follows')->name('follows');
+Route::post('users/{user}/unfollows', 'FollowsController@unfollows')->name('unfollows');
+// Route::get('/follow-list','PostsController@icon');
+// Route::get('/follower-list','PostsController@icon');
 
 
 

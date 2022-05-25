@@ -22,4 +22,7 @@ class Post extends Model
     {
         return $this->where('user_id', $user_id)->where('id', $post_id)->first();
     }
+    public function getPost($user_id){
+        return $this->where('user_id',$user_id)->first();
+    }
 }

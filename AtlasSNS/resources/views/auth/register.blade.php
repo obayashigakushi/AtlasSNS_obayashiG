@@ -1,10 +1,13 @@
+<div class='gla'>
+<div class='logout'>
+
 @extends('layouts.logout')
 
 @section('content')
 
 {!! Form::open() !!}
-
-<h2>新規ユーザー登録</h2>
+<div class='label'>
+<P>新規ユーザー登録</P>
 
     @if ($errors->any())
     <div class="alert alert-danger">
@@ -28,11 +31,13 @@
 {{ Form::label('password confirm') }}
 {{ Form::password('password_confirmation',null,['class' => 'input']) }}
 
-{{ Form::submit('登録') }}
+{{ Form::submit('LEGISTER',['input class' => 'btn btn-danger']) }}
 
 <p><a href="/login">ログイン画面へ戻る</a></p>
 
 {!! Form::close() !!}
-
+</div>
+</div>
+</div>
 
 @endsection

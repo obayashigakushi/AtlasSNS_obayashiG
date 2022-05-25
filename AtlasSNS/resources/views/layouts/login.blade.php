@@ -8,6 +8,7 @@
     <title></title>
     <link rel="stylesheet" href="{{ asset('css/reset.css') }} ">
     <link rel="stylesheet" href="{{ asset('css/style.css') }} ">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <!--スマホ,タブレット対応-->
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <!--サイトのアイコン指定-->
@@ -19,18 +20,24 @@
     <link rel="apple-touch-icon-precomposed" href="画像のURL" />
     <!--OGPタグ/twitterカード-->
 </head>
-<body>
+
     <header>
         <div id = "head">
-        <h1><a href="/top"><img src="images/atlas.png"></a></h1>
+        <h1><a href="/top"><img src="/images/atlas.png"></a></h1>
             <div id="">
                 <div id="">
 
 
+
+
+
+
+
 <div class="menu">
-  <input type="checkbox" id="menu_bar01" />
-  <label for="menu_bar01"><p>{{Auth::user()->username}}さん<img src=""></p></label>
+  <input type="checkbox" id="menu_bar01">
+  <label for="menu_bar01"><p>{{Auth::user()->username}}さん<img src="{{ '/storage/' . Auth::user()->images}}" class="rounded-circle"></p></label>
   <ul id="links01">
+
                     <li><a href="/top">ホーム</a></li>
                     <li><a href="/profile">プロフィール</a></li>
                     <li><a href="/logout">ログアウト</a></li>
@@ -39,6 +46,7 @@
 </div>
 
     </header>
+
     <div id="row">
         <div id="container">
             @yield('content')
@@ -51,20 +59,25 @@
                 <p>フォロー数</p>
                 <p>{{ Auth::user()->notFollowing()->get()->count() }}名</p>
                 </div>
-                <p class="btn"><a href="/followList">フォローリスト</a></p>
+<p class="btn"><a class="btn btn-primary" href="/followList" role="button">フォローリスト</a></p>
                 <div>
                 <p>フォロワー数</p>
                 <p>{{ Auth::user()->isFollowed()->get()->count() }}名</p>
                 </div>
-                <p class="btn"><a href="followerList">フォロワーリスト</a></p>
+<p class="btn"><a class="btn btn-primary" href="/followerList" role="button">フォロワーリスト</a></p>
             </div>
-            <p class="btn"><a href="/search">ユーザー検索</a></p>
+<p class="btn"><a class="btn btn-primary" href="/search" role="button">ユーザー検索</a></p>
         </div>
     </div>
+
     <footer>
     </footer>
+
     <script src="{{ asset('js/app.js') }} "></script>
 
-    <script src="JavaScriptファイルのURL"></script>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 </body>
 </html>

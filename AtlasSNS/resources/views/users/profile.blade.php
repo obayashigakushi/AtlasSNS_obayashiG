@@ -2,7 +2,7 @@
 
 @section('content')
 
-<img src=" {{asset('storage/$user->images') }}">
+<img src="{{ '/storage/' . $user['images']}}" class='rounded-circle'/>
 {!! Form::open(['url' => '/update', 'files' => true]) !!}
     @csrf
     @method('put')
@@ -41,10 +41,10 @@
     {{ Form::file('images',['class' => 'input']) }}
 
     <!-- <input type="file" name="imgpath"> -->
-
-</form>
+</div>
+<div>
 {{ Form::submit('更新') }}
 {!! Form::close() !!}
-
+</div>
 
 @endsection

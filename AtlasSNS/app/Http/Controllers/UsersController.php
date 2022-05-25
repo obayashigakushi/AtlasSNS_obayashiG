@@ -89,10 +89,13 @@ class UsersController extends Controller
          $user->bio=$request->bio;
          $user->id=auth()->user()->id;
 
+         $images = $user->images;
         if(request('images')){
+                \Storage::disk('public');
                 $original=request()->file('images')->getClientOriginalName();
-                $file=request()->file('images')->move('storage/app/public', $original);
+                $file=request()->file('images')->move('storage', $original);
                 $user->images=$original;
+
             }
             $user->save();
 

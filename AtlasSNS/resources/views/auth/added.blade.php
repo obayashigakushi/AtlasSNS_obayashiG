@@ -1,3 +1,6 @@
+<div class='gla'>
+<div class='logout'>
+
 @extends('layouts.logout')
 
 @section('content')
@@ -11,5 +14,6 @@
 
   <p class="btn"><a href="/login">ログイン画面へ</a></p>
 </div>
-
+</div>
+</div>
 @endsection
