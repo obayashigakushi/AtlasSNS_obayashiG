@@ -22,8 +22,8 @@
 </head>
 <body>
   <header>
-    <div class='logout'><img src="/images/atlas.png"></div>
-    <div class='logout'>Social Network Service</div>
+    <div class=''><img class="logout-img" src="/images/atlas.png"></div>
+    <div class='logout-title'>Social Network Service</div>
   </header>
 </body>
   <div id="container">

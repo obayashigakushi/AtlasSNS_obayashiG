@@ -3,24 +3,28 @@
 @section('content')
 
 <body>
+<div class="post">
                 <form action="/create_post" method="post">
             {{ csrf_field() }}
-                <div style="">
-                    <input type="text" name="post" style="margin: 1rem; padding: 0 1rem; width: 70%; border-radius: 6px; border: 1px solid #ccc; height: 2.3rem;" placeholder="入力">
 
-                    <!-- <input type='hidden' name='id' class="id"> -->
-
-                    <button type="submit" style="background-color: #2695E0; color: white; border-radius: 10px; padding: 0.5rem;">投稿</button>
-
-                @if($errors->first('post'))
-                    <p style="font-size: 0.7rem; color: red; padding: 0 2rem;">※{{$errors->first('post')}}</p>
+    <p class="new-post">
+<img src="{{ '/storage/' . Auth::user()->images}}" class="rounded-circle">
+                    <input  class="textarea" type="textarea" name="post"  placeholder="投稿内容を入力してください">
+                                    @if($errors->first('post'))
+                    <p class="e">※{{$errors->first('post')}}</p>
                 @endif
-                </div>
+                    <!-- <input type='hidden' name='id' class="id"> -->
+</p>
+                    <p class="submit1">
+        <input type ="image" name="submit" class="post" src="{{ asset('images/post.png') }}" alt=" 投稿">
+                    </p>
+
             </form>
+            </div>
 
                 @foreach($posts as $post)
                 <div>
-                <ul>
+                <ul class="post-section">
                 <li class="post-block">
 
 
@@ -28,27 +32,30 @@
                   <div class="post-content">
                       <div>
                     <div class="post-name">{{ $post->username }}</div>
-                    <div>{{ $post->created_at }}</div>
+                    <div class="created-at">{{ $post->created_at }}</div>
 
                     </div>
-                    <div>{{ $post->post }}</div>
-</div>
+                    <div class="post-post">{{ $post->post }}</div>
+
 
             @if (Auth::user()->id == $post->user_id)
-                <div>
-
-
-
+<div class="icon-btn">
+                <figure class="edit">
                     <img class="btn js-modal-open" post="{{$post->post}}" post_id="{{$post->id}}" src="{{ asset('images/edit.png') }}" alt="編集" >
-                    </button>
-</div>
+                </figure>
 
 
-                <div>
-                    <a href="/top/{{$post->post}}/delete" onclick="return confirm('こちらの投稿を削除してもよろしいでしょうか？')"><img class='delete' src="{{ asset('images/trash-h.png') }}" alt="削除" >
+                <figure class="trash-h">
+                    <a href="/top/{{$post->post}}/delete" onclick="return confirm('こちらの投稿を削除してもよろしいでしょうか？')">
+                    <div class='delete-icon'>
+                    <img class='delete-2'  src="{{ asset('images/trash.png') }}" alt="削除" >
+                    <img class='delete'  src="{{ asset('images/trash-h.png') }}" alt="削除" >
+                    </div>
                 </a>
+            </figure>
             </div>
              @endif
+</div>
 </li>
 </ul>
 </div>
@@ -62,14 +69,16 @@
     <form action="/top" method='post'>
         <textarea class="post" name='upPost'></textarea>
         <input type='hidden' name='post_id' class="post_id">
-        <input type='submit' value='送信'>
+        <div>
+  <input type ="image" name="submit" class="post-btn" src="{{ asset('images/edit.png') }}" alt=" 投稿">
+  </div>
         {{csrf_field()}}
     </form>
-            <a class="js-modal-close" href="">閉じる</a>
         </div><!--modal__inner-->
     </div><!--modal-->
         <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 <script>
+
     $(function () {
   $('.js-modal-open').on('click', function () {
     $('.js-modal').fadeIn();
@@ -80,12 +89,21 @@
     $('.post_id').val(post_id);
     return false;
   });
-  $('.js-modal-close').on('click', function () {
-    $('.js-modal').fadeOut();
-    return false;
-  });
+//   $('.js-modal-close').on('click', function () {
+//     $('.js-modal').fadeOut();
+//     return redirect("/top");
+//   });
 });
-</script>
 
+
+</script>
+<script>
+
+document.getElementById('main').onclick = function () {
+    var message = "外部ページの¥n http://xxx.yyy.zzz.co.jp/index.html ¥n を開きますか？";
+  this.style.backgroundColor = "#3fb811";
+};
+
+</script>
 
 @endsection

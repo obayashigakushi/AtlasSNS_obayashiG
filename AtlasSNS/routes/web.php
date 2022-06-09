@@ -58,6 +58,7 @@ Route::get('/top/{post}/delete', 'postsController@delete');
 Route::put('/top', 'PostsController@update');
 Route::post('/top', 'PostsController@update');
 
+Route::get('/followList','FollowsController@followIcon');
 Route::get('/followList','FollowsController@followList');
 Route::get('/followerList','FollowsController@followerList');
 Route::get('/profiles/{user_id}','FollowsController@show')->name('users.profiles');

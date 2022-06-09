@@ -1,42 +1,49 @@
 @extends('layouts.login')
 
 @section('content')
-<h1>検索</h1>
+<body class="search">
+    <div class="box">
 
 <form action="{{url('/search')}}" method="GET">
-    <p><input type="text" name="word" placeholder="ユーザー名"></p>
-    <p><input type="submit" value="検索"></p>
+    <div class="form">
+    <p><input class="text" type="text" name="word" placeholder="　　ユーザー名"></p>
+    <p><input type ="image" name="submit" class="search-icon" src="{{ asset('images/search.png') }}" alt=" 検索"></p>
+@if((isset($_GET['word'])))
+    <p class="search-word">検索ワード:　{{$word}}</p>
+ @endif
+    </div>
 </form>
 
-<p>検索ワード::{{$word}}</p>
+</div>
                 @foreach ($all_users as $user)
-                    <div class="">
-
+                    <div class="search-list">
+<div>
 <img src="{{ '/storage/' . $user['images']}}" class='rounded-circle'/>
 </div>
-                            <div class="">
-                                <p class="">{{ $user->username }}</p>
+                            <div class="user-box">
+                                <p class="username">{{ $user->username }}</p>
                             </div>
 
 @if($user->isFollowing()->where('following_id', Auth::id())->exists())
 
-                        <div class="">
+                        <div class="follow-btn">
                             <form action="{{ route('unfollow', $user) }}" method="POST">
                               @csrf
                                 <input type="submit" value="フォロー解除" class=" btn btn-danger">
                             </form>
                         </div>
                         @else
-                                                <div class="">
+                                                <div class="follow-btn">
                             <form action="{{ route('follow', $user) }}" method="POST">
                               @csrf
-                                <input type="submit" value="フォロー" class=" btn btn-success">
+                                <input type="submit" value="フォロー" class=" btn btn-primary">
                             </form>
                         </div>
 
 
                 @endif
+                </div>
                 @endforeach
 
-
+</body>
 @endsection

@@ -1,14 +1,20 @@
+
 @extends('layouts.login')
 
 @section('content')
-<body>
-               @foreach($posts->unique('user_id') as $post)
-              <td> <a href="{{ route('users.profiles',['user_id'=>$post->user_id])}}"><img src="{{ '/storage/' . $post['images']}}" class='rounded-circle'/></a> </td>
-               @endforeach
+<body class="follow">
 
+  <div class="box">
+                        <!-- <h>Follow　List</h> -->
+                <div class="icon-list">
+               @foreach($users->unique('id') as $user)
+ <a href="{{ route('users.profiles',['user_id'=>$user->id])}}"><img src="{{ '/storage/' . $user['images']}}" class='rounded-circle'/></a>
+               @endforeach
+</div>
+</div>
                 @foreach($posts as $post)
                 <div>
-                <ul>
+                <ul class="post-section">
                 <li class="post-block">
 
 
@@ -16,15 +22,16 @@
                   <div class="post-content">
                       <div>
                     <div class="post-name">{{ $post->username }}</div>
-                    <div>{{ $post->created_at }}</div>
+                    <div class="created-at">{{ $post->created_at }}</div>
 
                     </div>
-                    <div>{{ $post->post }}</div>
-</div>
+                    <div class="post-post">{{ $post->post }}</div>
 
+</div>
 </li>
 </ul>
 </div>
-</body>
+
                @endforeach
 @endsection
+</body>

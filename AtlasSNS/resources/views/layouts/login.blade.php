@@ -23,8 +23,9 @@
 
     <header>
         <div id = "head">
-        <h1><a href="/top"><img src="/images/atlas.png"></a></h1>
-            <div id="">
+            <div class="">
+        <a href="/top"><img class="atlas" src="/images/atlas.png"></a>
+</div>
                 <div id="">
 
 
@@ -35,12 +36,12 @@
 
 <div class="menu">
   <input type="checkbox" id="menu_bar01">
-  <label for="menu_bar01"><p>{{Auth::user()->username}}さん<img src="{{ '/storage/' . Auth::user()->images}}" class="rounded-circle"></p></label>
+  <label for="menu_bar01"><p class="auth-name">{{Auth::user()->username}}　さん<img src="{{ '/storage/' . Auth::user()->images}}" class="rounded-circle"></p></label>
   <ul id="links01">
 
-                    <li><a href="/top">ホーム</a></li>
-                    <li><a href="/profile">プロフィール</a></li>
-                    <li><a href="/logout">ログアウト</a></li>
+                    <li class="login-bar"><a class="link" href="/top">HOME</a></li>
+                    <li class="login-bar"><a class="link" href="/profile">プロフィール編集</a></li>
+                    <li class="login-bar"><a class="link" href="/logout">ログアウト</a></li>
   </ul>
 
 </div>
@@ -52,21 +53,23 @@
             @yield('content')
         </div >
 
-        <div id="side-bar">
-            <div id="confirm">
+        <div class="side-bar">
+            <div class="confirm">
                 <p>{{Auth::user()->username}}さんの</p>
-                <div>
+                <div class="follow-count">
                 <p>フォロー数</p>
                 <p>{{ Auth::user()->notFollowing()->get()->count() }}名</p>
                 </div>
-<p class="btn"><a class="btn btn-primary" href="/followList" role="button">フォローリスト</a></p>
-                <div>
+<p class="btn-follow"><a class="btn btn-primary" href="/followList" role="button">フォローリスト</a></p>
+                <div class="follow-count">
                 <p>フォロワー数</p>
                 <p>{{ Auth::user()->isFollowed()->get()->count() }}名</p>
                 </div>
-<p class="btn"><a class="btn btn-primary" href="/followerList" role="button">フォロワーリスト</a></p>
+<p class="btn-follow"><a class="btn btn-primary" href="/followerList" role="button">フォロワーリスト</a></p>
             </div>
-<p class="btn"><a class="btn btn-primary" href="/search" role="button">ユーザー検索</a></p>
+            <div class="search-line">
+<p class="btn-search"><a class="btn btn-primary" href="/search" role="button">ユーザー検索</a></p>
+</div>
         </div>
     </div>
 

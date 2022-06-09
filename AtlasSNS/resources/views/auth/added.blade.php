@@ -1,19 +1,24 @@
 <div class='gla'>
-<div class='logout'>
+<body class='added'>
 
 @extends('layouts.logout')
 
 @section('content')
 
-<div id="clear">
+<div class='logout'>
+    <div class='label'>
   @csrf
-  <p>{{$username}}さん</p>
-  <p>ようこそ！AtlasSNSへ！</p>
-  <p>ユーザー登録が完了しました。</p>
-  <p>早速ログインをしてみましょう。</p>
-
-  <p class="btn"><a href="/login">ログイン画面へ</a></p>
+  <div class="title">
+  <p class="t">{{$username}}さん</p>
+  <p class="t">ようこそ！AtlasSNSへ</p>
+  </div>
+  <div class="subtitle">
+  <p class="hallow">ユーザー登録が完了しました。</p>
+  <p class="hallow">早速ログインをしてみましょう！</p>
+ </div>
+ <a class="btn btn-danger" href="/login">ログイン画面へ</a>
 </div>
 </div>
+</body>
 </div>
 @endsection

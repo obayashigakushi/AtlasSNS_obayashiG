@@ -1,15 +1,15 @@
+<body class='register'>
 <div class='gla'>
-<div class='logout'>
 
 @extends('layouts.logout')
 
 @section('content')
-
+<div class='logout'>
+    <div class='label'>
 {!! Form::open() !!}
-<div class='label'>
 <P>新規ユーザー登録</P>
 
-    @if ($errors->any())
+    <!-- @if ($errors->any())
     <div class="alert alert-danger">
         <ul>
             @foreach ($errors->all() as $error)
@@ -17,27 +17,28 @@
             @endforeach
         </ul>
     </div>
-    @endif
-
-{{ Form::label('username') }}
+    @endif -->
+<div class="form">
+<div class="username">user name</div>
 {{ Form::text('username',null,['class' => 'input']) }}
 
-{{ Form::label('mail adress') }}
+<div class="e-mail">mail adress</div>
 {{ Form::text('mail',null,['class' => 'input']) }}
 
-{{ Form::label('password') }}
+<div class="password">password</div>
 {{ Form::password('password',null,['class' => 'input']) }}
 
-{{ Form::label('password confirm') }}
+<div class="confirm">password confirm</div>
 {{ Form::password('password_confirmation',null,['class' => 'input']) }}
-
+<div>
 {{ Form::submit('LEGISTER',['input class' => 'btn btn-danger']) }}
-
-<p><a href="/login">ログイン画面へ戻る</a></p>
+</div>
+<p crass=""><a class="link" href="/login">ログイン画面へ戻る</a></p>
 
 {!! Form::close() !!}
 </div>
 </div>
 </div>
-
+</div>
+</body>
 @endsection

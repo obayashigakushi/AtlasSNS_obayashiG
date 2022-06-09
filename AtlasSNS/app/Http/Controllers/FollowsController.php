@@ -15,7 +15,7 @@ class FollowsController extends Controller
 
     //
     public function followList(){
-
+ $users = User::query()->whereIn('id', Auth::user()->notFollowing()->pluck('followed_id'))->get();
         $posts = Post::query()->whereIn('user_id', Auth::user()->notFollowing()->pluck('followed_id'))->latest()
 
         ->select('posts.id','users.username', 'posts.user_id','posts.post', 'posts.created_at','users.images')
@@ -23,16 +23,17 @@ class FollowsController extends Controller
         ->get();
 
 
-        return view('follows.followList' , compact('posts'));
+        return view('follows.followList' , compact('posts', 'users'));
     }
     public function followerList(){
+         $users = User::query()->whereIn('id', Auth::user()->isFollowing()->pluck('following_id'))->get();
         $posts = Post::query()->whereIn('user_id', Auth::user()->isFollowing()->pluck('following_id'))->latest()
 
         ->select('posts.id','users.username', 'posts.user_id','posts.post', 'posts.created_at','users.images')
         ->join('users', 'users.id', '=', 'posts.user_id')
         ->get();
 
-        return view('follows.followerList' , compact('posts'));
+        return view('follows.followerList' , compact('posts', 'users'));
     }
 
 

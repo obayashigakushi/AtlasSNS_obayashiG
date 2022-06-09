@@ -1,7 +1,8 @@
 @extends('layouts.login')
 
 @section('content')
-
+<body class="profile">
+  <div class="profile-parts">
 <img src="{{ '/storage/' . $user['images']}}" class='rounded-circle'/>
 {!! Form::open(['url' => '/update', 'files' => true]) !!}
     @csrf
@@ -15,36 +16,45 @@
         </ul>
     </div>
     @endif
-<div>
-  {{ Form::label('user name') }}
+<div class="profile-list">
+  {{ Form::label('user name',) }}
   {{ Form::text('username',$user->username,['class' => 'input']) }}
 </div>
-<div>
+<div class="profile-list">
   {{ Form::label('mail adress') }}
   {{ Form::text('mail',$user->mail,['class' => 'input']) }}
 </div>
-<div>
+<div class="profile-list">
 {{ Form::label('password') }}
-{{ Form::password('password',null,['class' => 'input']) }}
+
+<input type='password' class='input' name='password'>
 </div>
-<div>
+<div class="profile-list">
 {{ Form::label('password confirm') }}
-{{ Form::password('password_confirmation',null,['class' => 'input']) }}
+
+<input type='password' class='input' name='password_confirmation'>
 </div>
-<div>
+<div class="profile-list">
   {{ Form::label('bio') }}
   {{ Form::text('bio',$user->bio,['class' => 'input']) }}
 </div>
-<div>
+<div class="profile-list">
   {{ Form::label('icon image') }}
 <!-- <form action="/upload" enctype="multipart/form-data" method="post"> -->
-    {{ Form::file('images',['class' => 'input']) }}
+  <h class="h">
 
-    <!-- <input type="file" name="imgpath"> -->
+</h>
 </div>
-<div>
-{{ Form::submit('更新') }}
+
+<label class="images" for="form-image">ファイルを選択</label>
+<input type='file' id='form-image' class='input' name='images'>
+    <!-- <input type="file" name="imgpath"> -->
+
+<div class="">
+ <input type="submit" value="更新" class=" btn btn-danger">
 {!! Form::close() !!}
+</div>
 </div>
 
 @endsection
+</body>
